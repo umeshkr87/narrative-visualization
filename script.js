@@ -150,7 +150,7 @@ async function initScene1() {
     const annotations = [
         {
         note: {
-            label: "15X meat consumption increased capared to 60's as economy growth",
+            label: "15X meat consumption increased capared to 60's with economic growth",
             title: ""
         },
         type: d3.annotationCalloutCircle,
@@ -336,10 +336,10 @@ function filterPieChartData(d) {
     // Entity,Code,Year,MeatPoultry,MeatBeef,MeatSheepAndGoat,MeatPig,MeatOther,FishAndSeafood
     pieData = [   {label: 'Beef', value: d.MeatBeef},
         {label: 'Sheep and Goat', value: d.MeatSheepAndGoat},
-        {label: 'Pig', value: d.MeatPig},
+        {label: 'Pig Meat', value: d.MeatPig},
         {label: 'Fish and Seafood', value: d.MeatOther},
         {label: 'Poultry', value: d.MeatPoultry},
-        {label: 'Others', value: d.FishAndSeafood}
+        {label: 'Other Meat', value: d.FishAndSeafood}
     ];
     
     // if (d.Code === 'USA' || d.Code === 'JPN')
@@ -357,7 +357,7 @@ async function initScene3(country) {
     var donutWidth = 75; //This is the size of the in the pie
 
     var colors = d3.scaleOrdinal()
-            .domain(['Beef', 'Sheep and Goat', 'Pig', 'Fish and Seafood', 'Poultry', 'Others'])
+            .domain(['Beef', 'Sheep and Goat', 'Pig Meat', 'Fish and Seafood', 'Poultry', 'Other Meat'])
             .range(['#d62728', '#ff7f0e', '#1f77b4', '#2ca02c', '#9467bd', '#8c564b']);
     
     var data = await d3.csv('http://127.0.0.1:5500/data/per-capita-meat-type.csv');
@@ -397,16 +397,16 @@ async function initScene3(country) {
         var height = legendRectSize + legendSpacing;
         var offset = height * colors.domain().length / 2;
         var horz = -2 * legendRectSize + 40;
-        var vert = i * height - offset + 75;
+        var vert = i * height - offset + 80;
         return 'translate(' + horz + ',' + vert + ')';
     });
-    legend.append('circle') //keys
+    legend.append('circle')
     .style('fill', colors)
     .style('stroke', colors)
     .attr('cx', 0)
     .attr('cy', 0)
     .attr('r', '.4rem');
-    legend.append('text') //labels
+    legend.append('text')
     .attr('x', legendRectSize + legendSpacing)
     .attr('y', legendRectSize - legendSpacing)
     .text(function (d) {

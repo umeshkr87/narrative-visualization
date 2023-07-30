@@ -10,7 +10,7 @@ div.tooltip {
     position: absolute;
     text-align: center;
     width: 500px;
-    height: 100px;
+    height: 75px;
     padding: 2px;
     font: 9px;
     /* background: #e0c2fc; */
@@ -50,19 +50,25 @@ img {
 }
 
 div.head {
-    padding: 0px;
+    padding: 30px;
     margin: 10px;
     font-size: 25px;
+    text-align: center; 
 }
 
-.center-div {
+
+/* .center-div {   
     display: flex;
     justify-content: center;
-}
+} */
 
 #info {
-    text-indent: 40%;
-    text-align: center;
+    /* margin: 10px; */
+    text-align: left;
+}
+
+#slider {
+    text-align: left;
 }
 .scene1-child {
     text-indent: 10%;
@@ -70,23 +76,26 @@ div.head {
 }
 
 .sub {
-
     font-size: 20px;
 } 
 
-p {
+/* p {
     padding-left: 1.5em;
     /* text-indent:-1.5em; */
-}
+/*} */
 
 .scene1-child {
     padding-left: 1.5em
 }
-.button:hover {
-    background-color:#6ec28d;
-    transition: 0.7s;
-}
 
-.button {
+.button:button3 {
     text-align: center;
   }
+
+.button-container {
+    display: block;
+    position: relative;
+    margin: auto;
+  }
+
+.button:hover {background-color: #06f6e2}

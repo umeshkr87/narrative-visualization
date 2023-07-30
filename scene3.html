@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Meat consumption Trend</title>
+        <title>Meat Consumption Trend</title>
         <link rel="stylesheet" href="./styling.css">
     </head>
     <body>
@@ -17,48 +17,43 @@
             </div>
         
             <div class='child' id="info">
-                <br><br><br>
+                
                 <div class="head">
                     <h1 class="center">Meat Consumption Trend of the World</h1>
                     <small>By <a href="mailto:umesh2@illinois.edu">Kumar, Umesh &lt;umesh2@illinois.edu&gt;</a></small>
                 </div>
                 
-                <div class='parent grid-parent2'>
-                    
-                    <form>
-                        <label>Country</label>
-                        <select name="country" id="country" onchange="updatePieChart()">
-                            <option value="United States" selected>United States</option>
-                        </select>
-                    </form>
-                    
-                    <!-- <div class='child' id="yaxis">
-                        <div id="label">Graph: Vegetable consumption per Capita vs GDP Per Capita</div>
-                    </div> -->
+                <div class='child'>
+                    <div class="child" id="option">
+                        <form>
+                            <label>Country</label>
+                            <select name="country" id="country" onchange="updatePieChart()">
+                                <option value="United States" selected>United States</option>
+                            </select>
+                        </form>
+                        <p id="info">Select a country to know its details</div>
+                        <p id='info'>Graph: Type of Meat Consumed by a Country in 2020<br>Hover for more details</p>
+                    </div>
+                </div>
+                <br>
+                <p>Here Pie chart shows the per capita consumption of different meat types by country in 2020. Pig meat is the most preferered around world.</p>
 
+                <!-- <div class='parent grid-parent3'>
+                    <div class='child'>
+                        <a href="scene2.html">
+                            <div class='child'><button class="button button3" id="Previous">Previous</button></div>
+                        </a>
+                        <a href="index.html">
+                            <div class='child'><button class="button button3" id="Next">Next>></button></div>
+                        </a>
+                    </div>
+                </div> -->
+                <div class="button-container">
+                    <a href="scene2.html"> <button class="button">Previous</button></a>
+                    <a href="index.html"> <button class="button">Restart</button></a>
                 </div>
-                <br>
-                <div class="center-div">Hover for more details</div>
-                <br>
-                <p>Chart shows what type of meat is consumed by each country per capita in 2020</p>
-    
-                <br><br>
-                <!-- <div class="center-div">Acknowledgements</div>
-                <p>Chart shows meat consumption per capita per year of world and highest and lowest cosnsuming coutry including USA    
-                </p> -->
-                <br>
-                <div class='parent grid-parent3'>
-                    <div class='child'></div>
-                    <a href="scene2.html">
-                        <div class='child'><button class="button button3" id="Previous">Previous</button></div>
-                    </a>
-                    <a href="index.html">
-                        <div class='child'><button class="button button3" id="Next">Next>></button></div>
-                    </a>
-                </div>
-    
             </div>
-
+            
         </div>
     </body>
 
