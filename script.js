@@ -150,7 +150,7 @@ async function initScene1() {
     const annotations = [
         {
         note: {
-            label: "15X meat consumption increased capared to 60's with economic growth",
+            label: "15X meat consumption increased with economic growth capared to 60's",
             title: ""
         },
         type: d3.annotationCalloutCircle,
