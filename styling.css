@@ -1,0 +1,92 @@
+html *
+{
+   color: #000 !important;
+   font-family: 'Helvetica Neue', sans-serif !important;
+   font-weight: 150 !important;
+   letter-spacing: 1px !important;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 500px;
+    height: 100px;
+    padding: 2px;
+    font: 9px;
+    /* background: #e0c2fc; */
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+  }
+
+
+  div.pietooltip {
+    position: absolute;
+    text-align: center;
+    width: 150px;
+    height: 60px;
+    padding: 2px;
+    font: 6px;
+    background: #f7f7f7;
+    /* border: solid; */
+    border-width: 1px;
+    border-radius: 5px;
+  }
+
+/* div {
+    width:100%;
+    position: absolute;
+} */
+
+.grid-parent {
+    display: grid;
+    grid-template-columns: 1fr 1fr
+}
+
+img {
+    position: relative;   
+    display: block;
+    float: left;
+}
+
+div.head {
+    padding: 0px;
+    margin: 10px;
+    font-size: 25px;
+}
+
+.center-div {
+    display: flex;
+    justify-content: center;
+}
+
+#info {
+    text-indent: 40%;
+    text-align: center;
+}
+.scene1-child {
+    text-indent: 10%;
+    text-align: left;
+}
+
+.sub {
+
+    font-size: 20px;
+} 
+
+p {
+    padding-left: 1.5em;
+    /* text-indent:-1.5em; */
+}
+
+.scene1-child {
+    padding-left: 1.5em
+}
+.button:hover {
+    background-color:#6ec28d;
+    transition: 0.7s;
+}
+
+.button {
+    text-align: center;
+  }

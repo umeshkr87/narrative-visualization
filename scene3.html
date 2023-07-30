@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js"></script>
+    <script src="./script.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Meat consumption Trend</title>
+        <link rel="stylesheet" href="./styling.css">
+    </head>
+    <body>
+        <div class='parent grid-parent'>
+            <div class='child'>
+                <div class="child" id="chart">
+                </div>
+            </div>
+        
+            <div class='child' id="info">
+                <br><br><br>
+                <div class="head">
+                    <h1 class="center">Meat Consumption Trend of the World</h1>
+                    <small>By <a href="mailto:umesh2@illinois.edu">Kumar, Umesh &lt;umesh2@illinois.edu&gt;</a></small>
+                </div>
+                
+                <div class='parent grid-parent2'>
+                    
+                    <form>
+                        <label>Country</label>
+                        <select name="country" id="country" onchange="updatePieChart()">
+                            <option value="United States" selected>United States</option>
+                        </select>
+                    </form>
+                    
+                    <!-- <div class='child' id="yaxis">
+                        <div id="label">Graph: Vegetable consumption per Capita vs GDP Per Capita</div>
+                    </div> -->
+
+                </div>
+                <br>
+                <div class="center-div">Hover for more details</div>
+                <br>
+                <p>Chart shows what type of meat is consumed by each country per capita in 2020</p>
+    
+                <br><br>
+                <!-- <div class="center-div">Acknowledgements</div>
+                <p>Chart shows meat consumption per capita per year of world and highest and lowest cosnsuming coutry including USA    
+                </p> -->
+                <br>
+                <div class='parent grid-parent3'>
+                    <div class='child'></div>
+                    <a href="scene2.html">
+                        <div class='child'><button class="button button3" id="Previous">Previous</button></div>
+                    </a>
+                    <a href="index.html">
+                        <div class='child'><button class="button button3" id="Next">Next>></button></div>
+                    </a>
+                </div>
+    
+            </div>
+
+        </div>
+    </body>
+
+</html>
