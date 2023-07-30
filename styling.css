@@ -33,11 +33,6 @@ div.tooltip {
     border-radius: 5px;
   }
 
-/* div {
-    width:100%;
-    position: absolute;
-} */
-
 .grid-parent {
     display: grid;
     grid-template-columns: 1fr 1fr
@@ -57,40 +52,18 @@ div.head {
 }
 
 
-/* .center-div {   
-    display: flex;
-    justify-content: center;
-} */
-
 #info {
-    /* margin: 10px; */
     text-align: left;
 }
 
 #slider {
     text-align: left;
 }
-.scene1-child {
-    text-indent: 10%;
-    text-align: left;
-}
+
 
 .sub {
     font-size: 20px;
 } 
-
-/* p {
-    padding-left: 1.5em;
-    /* text-indent:-1.5em; */
-/*} */
-
-.scene1-child {
-    padding-left: 1.5em
-}
-
-.button:button3 {
-    text-align: center;
-  }
 
 .button-container {
     display: block;
