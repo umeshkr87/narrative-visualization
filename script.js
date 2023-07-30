@@ -47,7 +47,7 @@ async function initScene1() {
     g = svg.append("g")
      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    data = await d3.csv('http://127.0.0.1:5500/data/meat-supply-per-person.csv');
+    data = await d3.csv('./data/meat-supply-per-person.csv');
     // console.log("Original Data Length: " + data.length);
     
     data = data.filter(filterRow);
@@ -208,16 +208,16 @@ async function initScene2(year) {
     selectedYear = year;
     // console.log('Year: ' + year);
     try {
-        //document.getElementById("chart").innerHTML = "";
+        
         // Create SVG element
-        svg = d3.select("#chart")//.append("svg")
+        svg = d3.select("#chart")
         .select("svg")
         .append("g")
         .attr("width", width+margin.left+margin.right)
         .attr("height",height+margin.top+margin.bottom+80)
         .attr("transform","translate("+margin.left+","+margin.top+")");
        
-        data = await d3.csv('http://127.0.0.1:5500/data/meat-consumption-vs-gdp-per-capita.csv');
+        data = await d3.csv('./data/meat-consumption-vs-gdp-per-capita.csv');
         // console.log("Original Data Length: " + data.length);
         
         data = data.filter(filterRowForScene2);
@@ -360,7 +360,7 @@ async function initScene3(country) {
             .domain(['Beef', 'Sheep and Goat', 'Pig Meat', 'Fish and Seafood', 'Poultry', 'Other Meat'])
             .range(['#d62728', '#ff7f0e', '#1f77b4', '#2ca02c', '#9467bd', '#8c564b']);
     
-    var data = await d3.csv('http://127.0.0.1:5500/data/per-capita-meat-type.csv');
+    var data = await d3.csv('./data/per-capita-meat-type.csv');
     // console.log('Original data length ' + data.length);
     data.filter(filterPieChartData);
     // console.log('Filtered data length ' + JSON.stringify(pieData));
