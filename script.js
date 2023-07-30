@@ -6,10 +6,6 @@ const width = widthTotal - margin.right - margin.left;
 const height = heightTotal - margin.top - margin.bottom;
 const colors = ['#1f77b4','#ff7f0e','#d62728','#9467bd'];
 
-// var colors = d3.scaleOrdinal()
-// .domain(['Asia', 'Africa', 'Europe', 'North America', 'Oceania', 'South America'])
-// .range(['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']);
-
 // Declare svg related params 
 let svg;
 let data;
@@ -17,13 +13,13 @@ let xScale;
 let yScale;
 
 function filterRow(d) {
-    if (d.Code !== "USA" && d.Code !== "CHN" && d.Code !== "OWID_WRL" && d.Code !== "GMB" /*&& d.Code !== "JPN"*/)
+    if (d.Code !== "USA" && d.Code !== "CHN" && d.Code !== "OWID_WRL" && d.Code !== "GMB")
         return;
     let newRow = {}
     // Entity, Code, Year, Meat
-    newRow.Entity = d.Entity;
-    newRow.Code = d.Code;
-    newRow.Year = d.Year;
+    newRow.Entity = +d.Entity;
+    newRow.Code = +d.Code;
+    newRow.Year = +d.Year;
     newRow.Meat = +d.Meat;
     // if (newRow.Code === "USA")
     // console.log('JSON Stringify: ' + JSON.stringify(newRow));
@@ -33,8 +29,8 @@ function filterRow(d) {
 // svg = d3.select("#chart").append("svg");
 async function initScene1() {
     
-try {
-    //document.getElementById("chart").innerHTML = "";
+    try {
+    
     // Create SVG element
     svg = d3.select("#chart")//.append("svg")
     .select("svg")
@@ -52,10 +48,10 @@ try {
      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     data = await d3.csv('http://127.0.0.1:5500/data/meat-supply-per-person.csv');
-    console.log("Original Data Length: " + data.length);
+    // console.log("Original Data Length: " + data.length);
     
     data = data.filter(filterRow);
-    console.log(" Filtered row size " + data.length);
+    // console.log(" Filtered data: " + JSON.stringify(data));
 
     // Add scales
     xScale = d3.scaleLinear()
@@ -151,45 +147,36 @@ try {
         .attr("transform", "rotate(-90)")
         .text("Meat Consumption Per Capita in Kilograms");
 
-        const annotations = [
-            {
-            note: {
-                label: "15X meat consumption increased capared to 60's as economy growth",
-                title: ""
-            },
-            type: d3.annotationCalloutCircle,
-            subject: {
-                radius: 20,     
-                radiusPadding: 0
-            },
-            color: ["grey"],
-            x: 475,
-            y: 335,
-            dy: -80,
-            dx: 80
-            }
-        ]
+    const annotations = [
+        {
+        note: {
+            label: "15X meat consumption increased capared to 60's as economy growth",
+            title: ""
+        },
+        type: d3.annotationCalloutCircle,
+        subject: {
+            radius: 20,     
+            radiusPadding: 0
+        },
+        color: ["grey"],
+        x: 475,
+        y: 335,
+        dy: -80,
+        dx: 80
+        }
+    ]
 
     // Add annotation to the chart
-const makeAnnotations = d3.annotation()
-.annotations(annotations)
-d3.select("svg")
-.append("g")
-.attr("class", "annotation-group")
-.call(makeAnnotations)
+    const makeAnnotations = d3.annotation()
+    .annotations(annotations)
+    d3.select("svg")
+    .append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations)
 
-// const makeAnnotations = d3.annotation()
-// .type(d3.annotationLabel)
-// .annotations(annotations)
-
-// d3.select("svg")
-//         .append("g")
-//         .attr("class", "annotation-group")
-//         .call(makeAnnotations)
-
-} catch (error) {
-    console.log('Error: ' + error);
-}
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
 }
 
 let selectedYear;
@@ -324,15 +311,6 @@ async function initScene2(year) {
         .attr("transform", "rotate(-90)")
         .text("Meat Consumption in Kilograms");
 
-    //     const makeAnnotations = d3.annotation()
-    //         .type(d3.annotationLabel)
-    //         .annotations(annotations)
-
-    // d3.select("svg")
-    // .append("g")
-    // .attr("class", "annotation-group")
-    // .call(makeAnnotations)
-
     } catch (error) {
         console.log('Error: ' + error);
     }
@@ -364,8 +342,6 @@ function filterPieChartData(d) {
         {label: 'Others', value: d.FishAndSeafood}
     ];
     
-    // console.log('JSON Stringify: ' + JSON.stringify(pieData) + ' ' + d.Entity);
-
     // if (d.Code === 'USA' || d.Code === 'JPN')
     // console.log('JSON Stringify: ' + JSON.stringify(pieData) + ' ' + d.Entity);
 }
@@ -374,15 +350,12 @@ function filterPieChartData(d) {
 
 async function initScene3(country) {
     selctedCountry = country;
-    console.log('Country Name: ' + country);
+    // console.log('Country Name: ' + country);
     var width = 530;
     var height = 530;
     var radius = Math.min(width, height) / 3;
-    var donutWidth = 75; //This is the size of the hole in the middle
+    var donutWidth = 75; //This is the size of the in the pie
 
-    //Only choose one! This one for a d3 color scheme:
-    //var color = d3.scaleOrdinal(d3.schemeCategory20c);
-    //Or this one for a customized color scheme:
     var colors = d3.scaleOrdinal()
             .domain(['Beef', 'Sheep and Goat', 'Pig', 'Fish and Seafood', 'Poultry', 'Others'])
             .range(['#d62728', '#ff7f0e', '#1f77b4', '#2ca02c', '#9467bd', '#8c564b']);
@@ -449,13 +422,14 @@ async function initScene3(country) {
              
           pietooltip.append('div')                                          
           .attr('class', 'value');
+
     var totalConsumption = 0;
     pieData.forEach(d => totalConsumption = parseFloat(totalConsumption) + parseFloat(d.value));
-    console.log('totalConsumption: ' + totalConsumption);
+    // console.log('totalConsumption: ' + totalConsumption);
+
     path.on('mouseover', function(d) {                                     
         pietooltip.select('.label').html("Total: " + d3.format('.2f') (totalConsumption)+" kg<br>"+d.data.label+": ");                
         pietooltip.select('.value').html(d3.format('.2f') (d.value) +" kg");
-        // pietooltip.style("background",  colors(d.data.label))    
         pietooltip.style('display', 'block')                  
       });                                                           
       
@@ -478,12 +452,12 @@ async function initScene3(country) {
 
 
 window.onload = function () {
-    console.log('In onload function')
+    // console.log('In onload function')
     var select = document.getElementById("country");
-    var values = ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Costa Rica', "Cote d'Ivoire", 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'French Polynesia', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Mongolia', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nepal', 'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Panama', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia and Montenegro', 'Sierra Leone', 'Slovakia', 'Slovenia', 'Solomon Islands', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'Suriname', 'Sweden', 'Switzerland', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'World','Yemen', 'Zambia', 'Zimbabwe'];
+    var countries = ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Costa Rica', "Cote d'Ivoire", 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'French Polynesia', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Mongolia', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nepal', 'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Panama', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia and Montenegro', 'Sierra Leone', 'Slovakia', 'Slovenia', 'Solomon Islands', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'Suriname', 'Sweden', 'Switzerland', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'World','Yemen', 'Zambia', 'Zimbabwe'];
     for(var i = 0; i < 168 ; ++i) {
         var option = document.createElement('option');
-        option.text = option.value = values[167-i];
+        option.text = option.value = countries[167-i];
         select.add(option, 0);
     }
     initScene3('United States');
